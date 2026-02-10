@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOEFL 2026 Listen & Repeat — 皓宇</title>
+  <style>
+    :root { --blue: #2f81f7; --green: #3fb950; --orange: #d29922; --bg: #f6f8fa; --card: #fff; --border: #d0d7de; --text: #1f2328; --muted: #656d76; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); padding: 16px; max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 20px; text-align: center; margin-bottom: 4px; }
+    .subtitle { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .controls { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; padding: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+    .controls label { font-size: 13px; color: var(--muted); }
+    .controls select, .controls input[type=range] { font-size: 13px; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+    .tab { flex: 1; text-align: center; padding: 10px 6px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; border: 2px solid var(--border); background: var(--card); transition: all .2s; }
+    .tab:hover { border-color: var(--blue); }
+    .tab.active-1 { background: #dbeafe; border-color: var(--blue); color: var(--blue); }
+    .tab.active-2 { background: #dcfce7; border-color: var(--green); color: var(--green); }
+    .tab.active-3 { background: #fff7ed; border-color: var(--orange); color: var(--orange); }
+    .scene { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 12px; line-height: 1.5; }
+    .scene b { color: var(--text); }
+    .sentence-card { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin-bottom: 6px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; transition: all .15s; }
+    .sentence-card.playing { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(47,129,247,.2); }
+    .num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; text-align: center; }
+    .text { flex: 1; font-size: 14px; line-height: 1.5; }
+    .words { font-size: 11px; color: var(--muted); min-width: 32px; text-align: right; }
+    .btn { width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 14px; flex-shrink: 0; transition: transform .1s; }
+    .btn:hover { transform: scale(1.1); }
+    .btn:active { transform: scale(0.95); }
+    .btn.repeat-btn { background: #e5e7eb; color: var(--text); font-size: 12px; }
+    .autoplay-bar { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    .autoplay-bar button { padding: 8px 18px; border-radius: 8px; border: 2px solid var(--blue); background: var(--card); color: var(--blue); font-weight: 600; font-size: 13px; cursor: pointer; }
+    .autoplay-bar button.running { background: var(--blue); color: #fff; }
+    .pause-label { font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>🎤 TOEFL 2026 Listen & Repeat</h1>
+  <p class="subtitle">皓宇 — 点击 ▶ 听句子，听完后立即复述</p>
+
+  <div class="controls">
+    <label>语速</label>
+    <input type="range" id="rate" min="0.5" max="1.5" step="0.1" value="1.0">
+    <span id="rateVal">1.0×</span>
+    <label style="margin-left:10px">声音</label>
+    <select id="voiceSel"></select>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active-1" data-set="0" id="tab0">Set 1 基础段<br><small>A2-B1</small></div>
+    <div class="tab" data-set="1" id="tab1">Set 2 进阶段<br><small>B1-B2</small></div>
+    <div class="tab" data-set="2" id="tab2">Set 3 冲刺段<br><small>B2-C1</small></div>
+  </div>
+
+  <div class="scene" id="sceneInfo"></div>
+
+  <div class="autoplay-bar">
+    <button id="autoBtn" onclick="toggleAuto()">▶ 自动连播</button>
+    <label class="pause-label">间隔 <select id="pauseSec"><option value="3">3s</option><option value="5" selected>5s</option><option value="8">8s</option><option value="10">10s</option></select></label>
+  </div>
+
+  <div id="list"></div>
+
+  <script>
+    const SETS = [
+      { title: "Set 1｜基础段 A2-B1", scene: "🎬 Campus Bookstore Tour", desc: "A bookstore employee is showing a new student around the campus bookstore.", sentences: ["Welcome to the campus bookstore.","We sell textbooks and school supplies.","New books are on the first floor.","Used books are cheaper and easier to find.","You can find notebooks and pens over there.","The checkout counter is near the front door.","We accept both cash and credit cards.","Student discounts are available with your ID card.","The return policy allows exchanges within two weeks.","Please keep your receipt if you want a refund.","Our store hours are from nine to six on weekdays.","We also have a small café in the back corner.","You can order coffee and sandwiches while you browse.","The bestseller section is right next to the main entrance.","We carry a wide selection of academic journals as well.","If we don't have a book in stock, we can order it for you.","Online orders can be picked up at the service desk downstairs.","During finals week, the store stays open until ten at night.","There's a study lounge upstairs where you can read before buying.","Feel free to ask any of our staff if you need help finding something."] },
+      { title: "Set 2｜进阶段 B1-B2", scene: "🎬 Natural History Museum Tour", desc: "A museum guide is leading a group of visitors through the exhibits.", sentences: ["Good morning, and welcome to the Natural History Museum.","Today's tour will take about an hour and a half.","We'll begin with the geology exhibit on the ground floor.","This collection features rocks and minerals from around the world.","The crystal display in the center was donated by a local university.","Please do not touch any of the items behind the glass.","Photography is allowed, but flash photography is not permitted in this area.","Moving on, we'll visit the marine biology section on the second floor.","You'll notice a full-size model of a blue whale hanging from the ceiling.","This exhibit explains how ocean currents affect the migration patterns of sea creatures.","Researchers have found that rising ocean temperatures are threatening coral reef ecosystems.","The interactive displays allow visitors to explore deep-sea environments through virtual reality.","Next, we'll head to the dinosaur wing, which is our most popular attraction.","The skeleton you see here belongs to a Tyrannosaurus rex discovered in Montana.","Scientists believe this particular specimen lived approximately sixty-five million years ago.","Recent studies suggest that some dinosaurs may have had feathers rather than scales.","The fossil preparation lab is visible through the window at the end of this hallway.","Our paleontologists are currently working on a newly discovered species from South America.","Before we move on, feel free to take a closer look at the exhibits and ask any questions.","The gift shop near the exit carries books, models, and educational kits related to everything you've seen today."] },
+      { title: "Set 3｜冲刺段 B2-C1", scene: "🎬 University Orientation — Academic Support", desc: "An orientation coordinator is explaining academic support services to new international students.", sentences: ["Welcome to the academic services orientation for new international students.","My name is Dr. Chen, and I'll be your guide this afternoon.","This session is designed to help you get familiar with the resources available on campus.","The writing center offers free one-on-one tutoring for any course that involves written assignments.","Appointments can be booked online, and walk-in sessions are available on Wednesday afternoons.","Our academic advisors are here to help you plan your course schedule each semester.","If you're having difficulty with any of your classes, we strongly encourage you to reach out early.","The library provides access to thousands of academic journals and databases through its online portal.","Research workshops are held every two weeks to help students develop their information literacy skills.","International students who need additional language support can visit the English Language Resource Center.","The center provides conversation groups, pronunciation workshops, and academic writing seminars throughout the semester.","Students who are struggling with time management or study strategies may benefit from our peer mentoring program.","Each mentor is a senior student who has been trained to help others develop effective learning habits.","The counseling office on the third floor offers confidential support for students dealing with stress or personal challenges.","We understand that adjusting to a new academic environment in a different country can be overwhelming at times.","That's why we've created a comprehensive support network that addresses both academic and personal well-being.","All registered students are automatically enrolled in the health insurance plan, which covers most medical services on campus.","If you experience any issues with your enrollment or financial aid, the registrar's office can assist you during business hours.","I'd like to remind everyone that maintaining a minimum grade point average is required to keep your scholarship and student visa status.","Please don't hesitate to reach out to any of the offices I've mentioned today, as we are all committed to helping you succeed in your academic journey here."] }
+    ];
+
+    let currentSet = 0, autoMode = false, autoTimer = null;
+    const synth = window.speechSynthesis;
+    let voices = [];
+
+    function loadVoices() {
+      voices = synth.getVoices().filter(v => v.lang.startsWith('en'));
+      const sel = document.getElementById('voiceSel');
+      if (!sel) return;
+      sel.innerHTML = '';
+      const preferred = ['Google US English', 'Samantha', 'Microsoft Jenny'];
+      voices.sort((a,b) => {
+        const ai = preferred.findIndex(p => a.name.includes(p));
+        const bi = preferred.findIndex(p => b.name.includes(p));
+        return (ai===-1?99:ai) - (bi===-1?99:bi);
+      });
+      voices.forEach((v,i) => {
+        const o = document.createElement('option');
+        o.value = i; o.textContent = v.name.substring(0,28) + ' (' + v.lang + ')';
+        sel.appendChild(o);
+      });
+    }
+    synth.onvoiceschanged = loadVoices;
+    loadVoices();
+
+    document.getElementById('rate').oninput = function() {
+      document.getElementById('rateVal').textContent = parseFloat(this.value).toFixed(1) + '×';
+    };
+
+    function switchSet(i) {
+      stopAuto();
+      currentSet = i;
+      document.querySelectorAll('.tab').forEach((t,idx) => {
+        t.className = 'tab' + (idx===i ? ' active-'+(i+1) : '');
+      });
+      const s = SETS[i];
+      document.getElementById('sceneInfo').innerHTML = '<b>' + s.scene + '</b><br>' + s.desc;
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+      s.sentences.forEach((txt,idx) => {
+        const wc = txt.split(/\s+/).length;
+        const card = document.createElement('div');
+        card.className = 'sentence-card';
+        card.id = 'card-' + idx;
+        card.innerHTML = `<span class="num">${idx+1}</span><span class="text">${txt}</span><span class="words">${wc}词</span>
+          <button class="btn repeat-btn" onclick="speak(${idx})">🔁</button>
+          <button class="btn" onclick="speak(${idx})">▶</button>`;
+        list.appendChild(card);
+      });
+    }
+
+    function speak(idx) {
+      synth.cancel();
+      document.querySelectorAll('.sentence-card').forEach(c => c.classList.remove('playing'));
+      const card = document.getElementById('card-' + idx);
+      if(card) { card.classList.add('playing'); card.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+      const u = new SpeechSynthesisUtterance(SETS[currentSet].sentences[idx]);
+      u.rate = parseFloat(document.getElementById('rate').value);
+      const vi = parseInt(document.getElementById('voiceSel').value);
+      if(voices[vi]) u.voice = voices[vi];
+      u.onend = function() {
+        if(card) card.classList.remove('playing');
+        if(autoMode && idx < SETS[currentSet].sentences.length - 1) {
+          const pause = parseInt(document.getElementById('pauseSec').value) * 1000;
+          autoTimer = setTimeout(() => speak(idx+1), pause);
+        } else if(autoMode) { stopAuto(); }
+      };
+      synth.speak(u);
+    }
+
+    function toggleAuto() {
+      if(autoMode) { stopAuto(); return; }
+      autoMode = true;
+      document.getElementById('autoBtn').className = 'running';
+      document.getElementById('autoBtn').textContent = '⏸ 暂停连播';
+      speak(0);
+    }
+
+    function stopAuto() {
+      autoMode = false; synth.cancel();
+      clearTimeout(autoTimer);
+      const btn = document.getElementById('autoBtn');
+      if(btn) { btn.className = ''; btn.textContent = '▶ 自动连播'; }
+      document.querySelectorAll('.sentence-card').forEach(c => c.classList.remove('playing'));
+    }
+
+    document.querySelectorAll('.tab').forEach(t => {
+      t.onclick = () => switchSet(parseInt(t.dataset.set));
+    });
+
+    switchSet(0);
+  </script>
+</body>
+</html>
