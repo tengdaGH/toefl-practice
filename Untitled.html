@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;TOEFL 2026 Listen &amp; Repeat — 皓宇&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root { --blue: #2f81f7; --green: #3fb950; --orange: #d29922; --bg: #f6f8fa; --card: #fff; --border: #d0d7de; --text: #1f2328; --muted: #656d76; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>* { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); padding: 16px; max-width: 720px; margin: 0 auto; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>h1 { font-size: 20px; text-align: center; margin-bottom: 4px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.subtitle { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 16px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.controls { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; padding: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.controls label { font-size: 13px; color: var(--muted); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.controls select, .controls input[type=range] { font-size: 13px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tabs { display: flex; gap: 6px; margin-bottom: 12px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tab { flex: 1; text-align: center; padding: 10px 6px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; border: 2px solid var(--border); background: var(--card); transition: all .2s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tab:hover { border-color: var(--blue); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tab.active-1 { background: #dbeafe; border-color: var(--blue); color: var(--blue); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tab.active-2 { background: #dcfce7; border-color: var(--green); color: var(--green); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tab.active-3 { background: #fff7ed; border-color: var(--orange); color: var(--orange); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scene { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 12px; line-height: 1.5; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scene b { color: var(--text); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sentence-card { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin-bottom: 6px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; transition: all .15s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sentence-card.playing { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(47,129,247,.2); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; text-align: center; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.text { flex: 1; font-size: 14px; line-height: 1.5; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.words { font-size: 11px; color: var(--muted); min-width: 32px; text-align: right; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn { width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 14px; flex-shrink: 0; transition: transform .1s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn:hover { transform: scale(1.1); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn:active { transform: scale(0.95); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn.repeat-btn { background: #e5e7eb; color: var(--text); font-size: 12px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.autoplay-bar { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.autoplay-bar button { padding: 8px 18px; border-radius: 8px; border: 2px solid var(--blue); background: var(--card); color: var(--blue); font-weight: 600; font-size: 13px; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.autoplay-bar button.running { background: var(--blue); color: #fff; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pause-label { font-size: 12px; color: var(--muted); }</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;h1&gt;🎤 TOEFL 2026 Listen &amp; Repeat&lt;/h1&gt;</p>
+<p class="p1">&lt;p class="subtitle"&gt;皓宇 — 点击 ▶ 听句子，听完后立即复述&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="controls"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;label&gt;语速&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;input type="range" id="rate" min="0.5" max="1.5" step="0.1" value="1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span id="rateVal"&gt;1.0×&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;label style="margin-left:10px"&gt;声音&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;select id="voiceSel"&gt;&lt;/select&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="tab active-1" data-set="0" id="tab0"&gt;Set 1 基础段&lt;br&gt;&lt;small&gt;A2-B1&lt;/small&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="tab" data-set="1" id="tab1"&gt;Set 2 进阶段&lt;br&gt;&lt;small&gt;B1-B2&lt;/small&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="tab" data-set="2" id="tab2"&gt;Set 3 冲刺段&lt;br&gt;&lt;small&gt;B2-C1&lt;/small&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="scene" id="sceneInfo"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="autoplay-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button id="autoBtn" onclick="toggleAuto()"&gt;▶ 自动连播&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;label class="pause-label"&gt;间隔 &lt;select id="pauseSec"&gt;&lt;option value="3"&gt;3s&lt;/option&gt;&lt;option value="5" selected&gt;5s&lt;/option&gt;&lt;option value="8"&gt;8s&lt;/option&gt;&lt;option value="10"&gt;10s&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="list"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const SETS = [</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{ title: "Set 1｜基础段 A2-B1", scene: "🎬 Campus Bookstore Tour", desc: "A bookstore employee is showing a new student around the campus bookstore.", sentences: [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Welcome to the campus bookstore.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"We sell textbooks and school supplies.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"New books are on the first floor.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Used books are cheaper and easier to find.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"You can find notebooks and pens over there.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The checkout counter is near the front door.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"We accept both cash and credit cards.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Student discounts are available with your ID card.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The return policy allows exchanges within two weeks.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Please keep your receipt if you want a refund.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Our store hours are from nine to six on weekdays.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"We also have a small café in the back corner.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"You can order coffee and sandwiches while you browse.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The bestseller section is right next to the main entrance.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"We carry a wide selection of academic journals as well.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"If we don't have a book in stock, we can order it for you.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Online orders can be picked up at the service desk downstairs.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"During finals week, the store stays open until ten at night.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"There's a study lounge upstairs where you can read before buying.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Feel free to ask any of our staff if you need help finding something."</p>
+<p class="p1"><span class="Apple-converted-space">  </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{ title: "Set 2｜进阶段 B1-B2", scene: "🎬 Natural History Museum Tour", desc: "A museum guide is leading a group of visitors through the exhibits.", sentences: [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Good morning, and welcome to the Natural History Museum.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Today's tour will take about an hour and a half.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"We'll begin with the geology exhibit on the ground floor.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"This collection features rocks and minerals from around the world.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The crystal display in the center was donated by a local university.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Please do not touch any of the items behind the glass.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Photography is allowed, but flash photography is not permitted in this area.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Moving on, we'll visit the marine biology section on the second floor.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"You'll notice a full-size model of a blue whale hanging from the ceiling.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"This exhibit explains how ocean currents affect the migration patterns of sea creatures.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Researchers have found that rising ocean temperatures are threatening coral reef ecosystems.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The interactive displays allow visitors to explore deep-sea environments through virtual reality.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Next, we'll head to the dinosaur wing, which is our most popular attraction.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The skeleton you see here belongs to a Tyrannosaurus rex discovered in Montana.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Scientists believe this particular specimen lived approximately sixty-five million years ago.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Recent studies suggest that some dinosaurs may have had feathers rather than scales.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The fossil preparation lab is visible through the window at the end of this hallway.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Our paleontologists are currently working on a newly discovered species from South America.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Before we move on, feel free to take a closer look at the exhibits and ask any questions.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The gift shop near the exit carries books, models, and educational kits related to everything you've seen today."</p>
+<p class="p1"><span class="Apple-converted-space">  </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{ title: "Set 3｜冲刺段 B2-C1", scene: "🎬 University Orientation — Academic Support", desc: "An orientation coordinator is explaining academic support services to new international students.", sentences: [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Welcome to the academic services orientation for new international students.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"My name is Dr. Chen, and I'll be your guide this afternoon.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"This session is designed to help you get familiar with the resources available on campus.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The writing center offers free one-on-one tutoring for any course that involves written assignments.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Appointments can be booked online, and walk-in sessions are available on Wednesday afternoons.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Our academic advisors are here to help you plan your course schedule each semester.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"If you're having difficulty with any of your classes, we strongly encourage you to reach out early.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The library provides access to thousands of academic journals and databases through its online portal.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Research workshops are held every two weeks to help students develop their information literacy skills.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"International students who need additional language support can visit the English Language Resource Center.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The center provides conversation groups, pronunciation workshops, and academic writing seminars throughout the semester.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Students who are struggling with time management or study strategies may benefit from our peer mentoring program.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Each mentor is a senior student who has been trained to help others develop effective learning habits.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"The counseling office on the third floor offers confidential support for students dealing with stress or personal challenges.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"We understand that adjusting to a new academic environment in a different country can be overwhelming at times.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"That's why we've created a comprehensive support network that addresses both academic and personal well-being.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"All registered students are automatically enrolled in the health insurance plan, which covers most medical services on campus.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"If you experience any issues with your enrollment or financial aid, the registrar's office can assist you during business hours.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"I'd like to remind everyone that maintaining a minimum grade point average is required to keep your scholarship and student visa status.",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"Please don't hesitate to reach out to any of the offices I've mentioned today, as we are all committed to helping you succeed in your academic journey here."</p>
+<p class="p1"><span class="Apple-converted-space">  </span>]}</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">let currentSet = 0, autoMode = false, autoTimer = null, currentPlaying = -1;</p>
+<p class="p1">const synth = window.speechSynthesis;</p>
+<p class="p1">let voices = [];</p>
+<p class="p2"><br></p>
+<p class="p1">function loadVoices() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>voices = synth.getVoices().filter(v =&gt; v.lang.startsWith('en'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const sel = document.getElementById('voiceSel');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sel.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const preferred = ['Google US English', 'Samantha', 'Microsoft Jenny', 'Microsoft Aria'];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>voices.sort((a,b) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const ai = preferred.findIndex(p =&gt; a.name.includes(p));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const bi = preferred.findIndex(p =&gt; b.name.includes(p));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (ai===-1?99:ai) - (bi===-1?99:bi);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>voices.forEach((v,i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const o = document.createElement('option');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>o.value = i; o.textContent = v.name.substring(0,28) + ' (' + v.lang + ')';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sel.appendChild(o);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p1">synth.onvoiceschanged = loadVoices;</p>
+<p class="p1">loadVoices();</p>
+<p class="p2"><br></p>
+<p class="p1">document.getElementById('rate').oninput = function() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('rateVal').textContent = parseFloat(this.value).toFixed(1) + '×';</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">function switchSet(i) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>stopAuto();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>currentSet = i;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.tab').forEach((t,idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>t.className = 'tab' + (idx===i ? ' active-'+(i+1) : '');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const s = SETS[i];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('sceneInfo').innerHTML = '&lt;b&gt;' + s.scene + '&lt;/b&gt;&lt;br&gt;' + s.desc;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const list = document.getElementById('list');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>list.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>s.sentences.forEach((txt,idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wc = txt.split(/\s+/).length;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const card = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.className = 'sentence-card';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.id = 'card-' + idx;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.innerHTML = '&lt;span class="num"&gt;' + (idx+1) + '&lt;/span&gt;' +</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'&lt;span class="text"&gt;' + txt + '&lt;/span&gt;' +</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'&lt;span class="words"&gt;' + wc + '词&lt;/span&gt;' +</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'&lt;button class="btn repeat-btn" title="再听一遍" onclick="speak('+idx+')"&gt;🔁&lt;/button&gt;' +</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'&lt;button class="btn" title="播放" onclick="speak('+idx+')"&gt;▶&lt;/button&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>list.appendChild(card);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function speak(idx) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>synth.cancel();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.sentence-card').forEach(c =&gt; c.classList.remove('playing'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const card = document.getElementById('card-' + idx);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(card) { card.classList.add('playing'); card.scrollIntoView({behavior:'smooth', block:'nearest'}); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>currentPlaying = idx;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const u = new SpeechSynthesisUtterance(SETS[currentSet].sentences[idx]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>u.rate = parseFloat(document.getElementById('rate').value);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const vi = parseInt(document.getElementById('voiceSel').value);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(voices[vi]) u.voice = voices[vi];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>u.onend = function() {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(card) card.classList.remove('playing');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(autoMode &amp;&amp; idx &lt; SETS[currentSet].sentences.length - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const pause = parseInt(document.getElementById('pauseSec').value) * 1000;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>autoTimer = setTimeout(() =&gt; speak(idx+1), pause);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else if(autoMode) { stopAuto(); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>synth.speak(u);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function toggleAuto() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(autoMode) { stopAuto(); return; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>autoMode = true;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('autoBtn').className = 'running';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('autoBtn').textContent = '⏸ 暂停连播';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>speak(0);</p>
+<p class="p1">}</p>
+<p class="p1">function stopAuto() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>autoMode = false; synth.cancel();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>clearTimeout(autoTimer);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('autoBtn').className = '';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('autoBtn').textContent = '▶ 自动连播';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.sentence-card').forEach(c =&gt; c.classList.remove('playing'));</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">document.querySelectorAll('.tab').forEach(t =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>t.onclick = () =&gt; switchSet(parseInt(t.dataset.set));</p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">switchSet(0);</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
